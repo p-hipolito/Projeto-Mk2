@@ -4,13 +4,7 @@
   "main": "script.js",
   "dependencies": {
     "browserify": "^17.0.0",
-    "browserify-fs": "^1.0.0",
-    "csv": "^6.2.8",
-    "csv-generate": "^4.2.2",
-    "csv-parse": "^5.3.6",
-    "csv-stringify": "^6.3.0",
-    "csv-writer": "^1.6.0",
-    "csvtojson": "^2.0.10"
+    "papaparse": "^5.4.1"
   },
   "scripts": {
     "gostosu": "browserify scripts/index.js -o scripts/bundle.js",
