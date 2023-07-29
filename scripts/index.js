@@ -1,33 +1,34 @@
-const Papa = require('papaparse');  //read files 
+const Papa = require('papaparse');  //analisador de arquivos
 const fileInput = document.getElementById('files'); //Lê o input
-
+const botao = document.getElementById('enviar');
 const handleFiles = () => {
-  const geladeira = [...fileInput.files].map((file) => {
+  const parser = [...fileInput.files].map((file) => {     //converte todos os arquivos
     return new Promise((resolve, reject) => {
       Papa.parse(file, {
         header: true,
         delimiter: ';',
-        complete: (convento)=>{resolve(convento)}
+        complete: (conversor)=>{resolve(conversor)}
       })
     })
   } )
-console.log(geladeira)
-const fechamentoPromise = Promise.all(geladeira)
+console.log(parser)
+const fechamentoPromise = Promise.all(parser)   //coleta todas as promises criadas acima
 
-// aiaiaiaiaiaiiaiaiaiaiaiaiiaiaiaiaiiaiaiaiaiiaiaiaiia
+//assim que todas as promises forem completas chama a função criaTabela:
 
-fechamentoPromise.then((dfCompletos) => {
+fechamentoPromise.then((dfCompletos) => {  
   console.log(dfCompletos)
   let totalmerged = []
   for ( const [index, f] of dfCompletos.entries()) {
     for (const [index2, g] of dfCompletos.entries()) {
-      if (index !== index2) {
+      if (index !== index2) {    //filtra para que uma tabela não seja comparada consigo mesma
         criaTabela(f.data, g.data, totalmerged)
       }
     }
   }
+  //filtra arquivos repetidos dentro do arquivo final:
   var temp=[ ]
-  totalmerged=totalmerged.filter((item)=>{
+  totalmerged=totalmerged.filter((item)=>{    
   if(!temp.includes(item.Produto)){
     temp.push(item.Produto)
     return true;
@@ -35,14 +36,14 @@ fechamentoPromise.then((dfCompletos) => {
   })
   console.log(totalmerged);
   console.log(temp);
-  const csv = Papa.unparse(totalmerged);
+  const csv = Papa.unparse(totalmerged);    //transforma arquivo em csv 
   downloadCSV(csv)
 })
 };
 
-// uiuiuiuiuiuiuiuiuiuiuiuiu
+// Filtra dentre as tabelas criadas:
 
-function criaTabela(tabela1, tabela2, totalmerged) {
+function criaTabela(tabela1, tabela2, totalmerged) {      
   const dfmerged = tabela1.filter(item1 => {
     const item2 = tabela2.find(item2 => item1['Produto'] === item2['Produto']);
     return item2 !== undefined;
@@ -50,13 +51,13 @@ function criaTabela(tabela1, tabela2, totalmerged) {
     const item2 = tabela2.find(item2 => item1['Produto'] === item2['Produto']);
     return { ...item1, ...item2 };
   });
-  totalmerged.push(...dfmerged)
+  totalmerged.push(...dfmerged)   //adiciona resultado ao final do array
 };
-fileInput.addEventListener("change", handleFiles); //chama função ao mudar os valores do input 'files'
+botao.addEventListener("click", handleFiles); //chama função ao clicar no botão 'enviar'
  
-// oioiopipipipoipoipoipoi
+//Fazer download do arquivo final:
 
-function downloadCSV(margarina)
+function downloadCSV(margarina)   
 {
     var csvData = new Blob([margarina], {type: 'text/csv;charset=utf-8;'});
     var csvURL =  null;
