@@ -27,14 +27,24 @@ const fechamentoPromise = Promise.all(geladeira)
 
 fechamentoPromise.then((dfCompletos) => {
   console.log(dfCompletos)
-  const totalmerged = []
+  let totalmerged = []
   for ( const [index, f] of dfCompletos.entries()) {
     for (const [index2, g] of dfCompletos.entries()) {
       if (index !== index2) {
         criaTabela(f.data, g.data, totalmerged)
       }
     }
-  } const csv = Papa.unparse(totalmerged);
+  }
+  var temp=[ ]
+  totalmerged=totalmerged.filter((item)=>{
+  if(!temp.includes(item.Produto)){
+    temp.push(item.Produto)
+    return true;
+  }
+  })
+  console.log(totalmerged);
+  console.log(temp);
+  const csv = Papa.unparse(totalmerged);
   downloadCSV(csv)
 })
 };
@@ -73,5 +83,6 @@ function downloadCSV(margarina)
     tempLink.setAttribute('download', 'download.csv');
     tempLink.click();
 }
+
 
 },{"papaparse":1}]},{},[2]);
