@@ -9,7 +9,7 @@
 
 body {
     font: Times;
-    background: url(./assets/Cci49KwW8AA6mAI.jpg_large) no-repeat top center/cover;
+    background: url(./assets/bg-desktop.jpg) no-repeat top center/cover;
     max-width: fit-content;
 }
 
@@ -46,7 +46,7 @@ h1 {
 
 #imagem:hover{
     cursor:pointer; 
-    background-color: rgb(11, 14, 14);
+    background-color: rgba(35, 45, 45, 0.765);
     border: 5px solid black;
 }
 
