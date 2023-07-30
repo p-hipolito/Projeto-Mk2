@@ -9,7 +9,8 @@ License: MIT
 },{}],2:[function(require,module,exports){
 const Papa = require('papaparse');  //analisador de arquivos
 const fileInput = document.getElementById('files'); //Lê o input
-const botao = document.getElementById('enviar');
+const icone = document.getElementById('imagem');
+const botao = document.getElementById('jona');
 const handleFiles = () => {
   const parser = [...fileInput.files].map((file) => {     //converte todos os arquivos
     return new Promise((resolve, reject) => {
@@ -36,8 +37,8 @@ fechamentoPromise.then((dfCompletos) => {
     }
   }
   //filtra arquivos repetidos dentro do arquivo final:
-  var temp=[ ]
-  totalmerged=totalmerged.filter((item)=>{    
+  var temp = [ ]
+  totalmerged = totalmerged.filter((item)=>{    
   if(!temp.includes(item.Produto)){
     temp.push(item.Produto)
     return true;
@@ -66,9 +67,9 @@ botao.addEventListener("click", handleFiles); //chama função ao clicar no bot�
  
 //Fazer download do arquivo final:
 
-function downloadCSV(margarina)   
+function downloadCSV(csv)   
 {
-    var csvData = new Blob([margarina], {type: 'text/csv;charset=utf-8;'});
+    var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
     var csvURL =  null;
     if (navigator.msSaveBlob)
     {
@@ -81,9 +82,14 @@ function downloadCSV(margarina)
 
     var tempLink = document.createElement('a');
     tempLink.href = csvURL;
-    tempLink.setAttribute('download', 'download.csv');
+    tempLink.setAttribute('download', 'reincidencia.csv');
     tempLink.click();
 }
+
+//usar algo além do botão feiozo do caralho q é o padrão
+icone.addEventListener('click', () => {
+  fileInput.click();
+})
 
 
 },{"papaparse":1}]},{},[2]);
