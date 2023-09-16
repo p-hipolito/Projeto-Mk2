@@ -16,7 +16,7 @@ new .csv file with only the itens that appear on 2 or more of them.
 <br>
 
 <p align="center">
-  <img alt="Site preview" src=".github/project.png" width="60%">
+  <img alt="Site preview" src=".github/project.PNG" width="60%">
 </p>
 
 ## 🚀 Techs
