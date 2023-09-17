@@ -8,7 +8,9 @@
   },
   "scripts": {
     "gostosu": "browserify scripts/index.js -o scripts/bundle.js",
-    "updater": "watchify scripts/index.js -o scripts/bundle.js -v"
+    "updater": "watchify scripts/index.js -o scripts/bundle.js -v",
+    "linter:check": "prettier --check .",
+    "linter:fix": "prettier --write ."
   },
   "author": "",
   "license": "ISC",

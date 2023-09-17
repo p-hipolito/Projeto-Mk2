@@ -4,8 +4,9 @@
 This is a personal project, designed to help me and my
 team in our daily activities.
 
-It scans through all the .csv files provided and creates a 
+It scans through all the .csv files provided and creates a
 new .csv file with only the itens that appear on 2 or more of them.
+
 </p>
 
 <p align="center">
@@ -27,7 +28,6 @@ These are the techs used:
 - NodeJS
 - HTML and CSS
 - Git and Github
-
 
 ## 🔖 Social
 
